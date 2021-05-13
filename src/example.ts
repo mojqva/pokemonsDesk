@@ -35,7 +35,7 @@ interface myArray<T> {
 
 }
 
-const myArray: Array<number> = [1, 2, 3]
+const myArray: myArray<number> = [1, 2, 3]
 
 myArray.reduce((sum, current) => {return sum + current})
 
