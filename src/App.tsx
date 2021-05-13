@@ -2,8 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 
 const App = () => {
-    console.log('Hi');
-
     return <div className={cn('color')}>Did it!This is App Component!</div>;
 };
 
