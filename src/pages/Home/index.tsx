@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
+import Parallax from '../../components/Parallax';
 import s from './Home.module.scss';
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
                 </h1>
                 <p>You can know the type of Pokemon</p>
                 <Button onClick={() => console.log('Click')}>See Pokemons</Button>
+                <Parallax />
             </Layout>
         </div>
     );

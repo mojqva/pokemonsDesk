@@ -7,35 +7,65 @@ import CloudBigPng from './assets/Vector1.png';
 import PikachuPng from './assets/Pikachu.png';
 
 const Parallax = () => {
-    const [screenX, setScreenX] = useState(0);
-    const [screenY, setScreenY] = useState(0);
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
 
-    const mouseMove = (event: MouseEvent) => {
-        setScreenX(event.screenX);
-        setScreenY(event.screenY);
+    const handleMouseMove = ({ screenX, screenY }: MouseEvent) => {
+        setX(screenX);
+        setY(screenY);
     };
-
     useEffect(() => {
-        window.addEventListener('mousemove', mouseMove);
-        return window.removeEventListener('mousemove', mouseMove);
-    }, [screenX, screenY]);
+        window.addEventListener('mousemove', handleMouseMove);
+
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
     return (
         <div>
             <div>
-                <img src={SmallPokeballPng} alt="Pic" style={{ width: '260px' }} />
+                <img
+                    src={SmallPokeballPng}
+                    alt="Pic"
+                    style={{
+                        transform: `translate(${x * 0.01}px , ${y * 0.01}px)`,
+                    }}
+                />
             </div>
             <div>
-                <img src={PokeballPng} alt="Pic" />
+                <img
+                    src={PokeballPng}
+                    alt="Pic"
+                    style={{
+                        transform: `translate(${x * 0.02}px , ${y * 0.02}px)`,
+                    }}
+                />
             </div>
             <div>
-                <img src={CloudPng} alt="Pic" />
+                <img
+                    src={CloudPng}
+                    alt="Pic"
+                    style={{
+                        transform: `translate(${x * 0.03}px , ${y * 0.03}px)`,
+                    }}
+                />
             </div>
             <div>
-                <img src={CloudBigPng} alt="Pic" />
+                <img
+                    src={CloudBigPng}
+                    alt="Pic"
+                    style={{
+                        transform: `translate(${x * 0.04}px , ${y * 0.04}px)`,
+                    }}
+                />
             </div>
             <div>
-                <img src={PikachuPng} alt="Pic" />
+                <img
+                    src={PikachuPng}
+                    alt="Pic"
+                    style={{
+                        transform: `translate(${x * 0.05}px , ${y * 0.05}px)`,
+                    }}
+                />
             </div>
         </div>
     );
