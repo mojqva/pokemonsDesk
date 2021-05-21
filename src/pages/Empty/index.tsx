@@ -1,20 +1,15 @@
-import React from 'react'
-import Header from '../../components/Header'
+import React from 'react';
 
 interface EmptyPageProps {
-    title?: string
+    title?: string;
 }
 
-const EmptyPage: React.FC<EmptyPageProps>= ({title}) => {
+const EmptyPage: React.FC<EmptyPageProps> = ({ title }) => {
     return (
         <div>
-            <Header />
-            <div>
-                This is Empty Page of {title}
-            </div>
+            <div>This is Empty Page of {title}</div>
         </div>
-        
-    )
-}
+    );
+};
 
-export default EmptyPage
+export default EmptyPage;

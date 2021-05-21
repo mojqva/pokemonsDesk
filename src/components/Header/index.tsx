@@ -7,8 +7,7 @@ import { GENERAL_MENU } from '../../routes';
 
 const Header = () => {
     const path = usePath();
-    console.log(path);
-
+    console.log('Header');
     return (
         <div className={s.root}>
             <div className={s.wrap}>
@@ -32,4 +31,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);
