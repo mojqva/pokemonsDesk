@@ -22,6 +22,14 @@ export interface IPokemon {
     weight?: number;
 }
 
+export interface IData {
+    total: number;
+    count: number;
+    offset: number;
+    limit: number;
+    pokemons: IPokemon[];
+}
+
 export const pokemons: IPokemon[] = [
     {
         name_clean: 'bulbasaur',
