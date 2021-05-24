@@ -1,15 +1,13 @@
 import React from 'react';
+import { A, usePath } from 'hookrouter';
+import cn from 'classnames';
 import { ReactComponent as PokemonLogo } from './assets/Logo.svg';
-import {A, usePath} from 'hookrouter'
 import s from './Header.module.scss';
 import { GENERAL_MENU } from '../../routes';
-import cn from 'classnames'
-
 
 const Header = () => {
     const path = usePath();
-    console.log(path);
-    
+    console.log('Header');
     return (
         <div className={s.root}>
             <div className={s.wrap}>
@@ -17,14 +15,13 @@ const Header = () => {
                     <PokemonLogo />
                 </div>
                 <div className={s.menuWrap}>
-                    {GENERAL_MENU.map(({ title, link}) => (
-                        <A 
-                            href={link} 
+                    {GENERAL_MENU.map(({ title, link }) => (
+                        <A
+                            href={link}
                             className={cn(s.menuLink, {
                                 [s.menuLinkActive]: link === path,
-                            })} 
-                            key={title}
-                        >
+                            })}
+                            key={title}>
                             {title}
                         </A>
                     ))}
@@ -34,4 +31,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);
