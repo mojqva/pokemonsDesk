@@ -1,48 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Heading from '../../components/Heading';
-import { IData } from '../../pokemons';
-import req from '../../utils/request';
-
+import PokemonCard from '../../components/PokemonCard';
+import useData from '../../hook/getData';
+import useDebounce from '../../hook/useDebounce';
+import { IData} from '../../pokemons';
 import s from './Pokedex.module.scss';
 
-const usePokemons = () => {
-    const [data , setData] = useState<IData>({} as IData);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
+interface IQuery {
+    name?: string
+}
 
-    useEffect(() => {
-        const getPokemons = async () => {
-            setIsLoading(true);
-            try {
-                const result = await req('getPokemons');
-
-                setData(result);
-            } catch (e) {
-                setIsError(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        getPokemons();
-    }, [])
-
-    return {
-        data, 
-        isLoading, 
-        isError
-    }
+export enum Endpoints {
+    GET_POKEMONS = 'getPokemons'
 }
 
 const PokedexPage = () => {
+    const [search, setSearch] = useState('');
+    const [query, setQuery] = useState<IQuery>({});
+
+    const debounceValue = useDebounce(search, 500);
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+        setQuery((state: IQuery) => ({
+            ...state,
+            name: event.target.value
+        }))
+    }
+
     const { 
         data,
         isLoading,
         isError
-    } = usePokemons()
-
-    if(isLoading) {
-        return <div>Loading...</div>
-    }
+    } = useData<IData>(Endpoints.GET_POKEMONS, query, [debounceValue])
 
     if (isError) {
         return <div>Something wrong!</div>
@@ -51,11 +41,23 @@ const PokedexPage = () => {
     return (
         <div>
             <Heading type="h2" className={s.root}>
-                {data.total} Pokemons for you to choose your favourite
+                {!isLoading && data.total} Pokemons for you to choose your favourite
             </Heading>
-            <div style={{ 'display': 'block' }}>
+            <div>
+                <input type="text" value={search} onChange={handleSearchChange}/>
+            </div>
+            <div className={s.pokemons}>
                 {
-                    data.pokemons.map(item => <div key={item.id}>{item.name}</div>)
+                    !isLoading && 
+                    data.pokemons.map(({id, name, stats, types, img}) => {
+                        return (<PokemonCard
+                            id={id}
+                            name={name}
+                            stats={stats}
+                            types={types}
+                            img={img}
+                        />)
+                    })
                 }
             </div> 
         </div>
