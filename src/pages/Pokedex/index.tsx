@@ -11,7 +11,8 @@ interface IQuery {
 }
 
 export enum Endpoints {
-    GET_POKEMONS = 'getPokemons'
+    GET_POKEMONS = 'getPokemons',
+    GET_POKEMON = 'getPokemon'
 }
 
 const PokedexPage = () => {
