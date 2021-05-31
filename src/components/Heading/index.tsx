@@ -1,14 +1,31 @@
 import React from 'react'
+import cn from 'classnames'
+import s from './Heading.module.scss'
 
-type HeadType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' ;
-interface IHeading {
-    type: HeadType,
+type HeadType = 'xl' | 'l' | 'm' | 's' | 'xs';
+interface IHeadingProps {
+    size?: HeadType,
     className?: string
 }
 
-const Heading: React.FC<IHeading> = ({children, type, className}) => {
-    const Tag = `${type}` as keyof JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>
+interface IHeadingTypes {
+    [n: string]: number
+}
+
+const HeadingTypes: IHeadingTypes = {
+    xl: 1,
+    l: 2,
+    m: 3,
+    s: 4,
+    xs: 5,
+    xxs: 6,
+    p: 6
+}
+
+const Heading: React.FC<IHeadingProps> = ({children, size = 'xl', className}) => {
+    const HeadingClasses = {
+        className: cn(s[size], className)}
+    return React.createElement(`h${HeadingTypes[size]}`, HeadingClasses, children)
 }
 
 export default Heading
