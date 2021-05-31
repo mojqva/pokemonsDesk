@@ -41,7 +41,7 @@ const PokedexPage = () => {
 
     return (
         <div>
-            <Heading type="h2" className={s.root}>
+            <Heading size="l" className={s.root}>
                 {!isLoading && data.total} Pokemons for you to choose your favourite
             </Heading>
             <div>
