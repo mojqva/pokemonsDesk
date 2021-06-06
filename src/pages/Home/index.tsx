@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <div className={s.root}>
             <Layout className={s.layout}>
-                <Heading type="h1">
+                <Heading size="xl">
                     <b>Find</b> all your favourite <b>Pokemons</b>
                 </Heading>
                 <p>You can know the type of Pokemon</p>

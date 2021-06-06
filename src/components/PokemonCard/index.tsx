@@ -8,7 +8,7 @@ const PokemonCard: React.FC<IPokemon> = ({ name, stats, types, img }) => {
     return (
         <div className={s.root}>
             <div className={s.infoWrap}>
-                <Heading type="h3" className={s.titleName}>
+                <Heading size="m" className={s.titleName}>
                     {name}
                 </Heading>
                 <div className={s.statWrap}>
