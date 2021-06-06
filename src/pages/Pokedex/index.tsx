@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTypesAction} from '../../store/pokemons'
 import Heading from '../../components/Heading';
 import PokemonCard from '../../components/PokemonCard';
 import useData from '../../hook/getData';
 import useDebounce from '../../hook/useDebounce';
 import { IData} from '../../pokemons';
+import {Endpoints} from '../../config'
 import s from './Pokedex.module.scss';
 
 interface IQuery {
     name?: string
 }
 
-export enum Endpoints {
-    GET_POKEMONS = 'getPokemons',
-    GET_POKEMON = 'getPokemon'
-}
-
 const PokedexPage = () => {
+    const dispatch = useDispatch();
+    const types = useSelector((state) => {state.pokemons.types.data});
+    console.log(types);
     const [search, setSearch] = useState('');
     const [query, setQuery] = useState<IQuery>({});
 
@@ -34,6 +35,10 @@ const PokedexPage = () => {
         isLoading,
         isError
     } = useData<IData>(Endpoints.GET_POKEMONS, query, [debounceValue])
+
+    useEffect(() => {
+        dispatch(getTypesAction())
+    }, [])
 
     if (isError) {
         return <div>Something wrong!</div>
