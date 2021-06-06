@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypesAction} from '../../store/pokemons'
+import { getPokemonsTypes, getTypesAction, getPokemonsTypesLoading} from '../../store/pokemons'
 import Heading from '../../components/Heading';
 import PokemonCard from '../../components/PokemonCard';
 import useData from '../../hook/getData';
@@ -15,7 +15,8 @@ interface IQuery {
 
 const PokedexPage = () => {
     const dispatch = useDispatch();
-    const types = useSelector((state) => {state.pokemons.types.data});
+    const types = useSelector(getPokemonsTypes);
+    const isTypesLoading = useSelector(getPokemonsTypesLoading)
     console.log(types);
     const [search, setSearch] = useState('');
     const [query, setQuery] = useState<IQuery>({});
@@ -51,6 +52,11 @@ const PokedexPage = () => {
             </Heading>
             <div>
                 <input type="text" value={search} onChange={handleSearchChange}/>
+            </div>
+            <div>
+                {
+                    isTypesLoading ? <div>Loader</div> : types?.map((item) => <div>{item}</div>)
+                }
             </div>
             <div className={s.pokemons}>
                 {

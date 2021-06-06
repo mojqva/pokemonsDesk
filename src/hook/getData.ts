@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Endpoints } from '../pages/Pokedex';
+import { Endpoints } from '../config';
 import req from '../utils/request';
 
 const useData = <T>(endpoint: Endpoints , query: object, deps: any[] = []) => {

@@ -1,5 +1,8 @@
 import { Dispatch } from "react";
+import { IInitialState } from ".";
 import { Endpoints } from "../config";
+import { IStateRequest } from "../interface";
+import {ITypesRequest} from '../pokemons'
 import req from "../utils/request";
 
 export enum PokemonsActionTypes {
@@ -15,7 +18,11 @@ interface TypesAction {
 
 type ActionTypes = TypesAction
 
-const initialState = {
+export interface IPokemonsInitialState {
+    types: IStateRequest<string>
+}
+
+const initialState: IPokemonsInitialState = {
     types: {
         isLoading: false,
         data: null,
@@ -56,6 +63,9 @@ const pokemons = (state = initialState, action: ActionTypes) => {
             return state;
     }
 }
+
+export const getPokemonsTypes = (state: IInitialState) => state.pokemons.types.data;
+export const getPokemonsTypesLoading = (state: IInitialState) => state.pokemons.types.isLoading;
 
 export const getTypesAction = () => {
     return async (dispatch: Dispatch<ActionTypes>) => {
