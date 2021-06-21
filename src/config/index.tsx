@@ -1,3 +1,9 @@
+export enum Endpoints {
+    GET_POKEMONS = 'getPokemons',
+    GET_POKEMON = 'getPokemon',
+    GET_POKEMON_TYPES = 'getPokemonTypes'
+}
+
 export const config = {
     client: {
         server: {
@@ -15,6 +21,12 @@ export const config = {
                 method: 'GET',
                 uri: {
                     pathname: '/api/v1/pokemon/{id}',
+                }
+            },
+            getPokemonTypes: {
+                method: 'GET',
+                uri: {
+                    pathname: '/api/v1/types'
                 }
             }
         }

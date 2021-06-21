@@ -1,7 +1,7 @@
 import React from 'react'
 import useData from '../../hook/getData'
 import { IPokemon } from '../../pokemons'
-import { Endpoints } from '../Pokedex'
+import { Endpoints } from '../../config'
 
 export interface IProps {
     id: number | string

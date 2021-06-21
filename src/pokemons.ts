@@ -30,6 +30,8 @@ export interface IData {
     pokemons: pokemonsRequest;
 }
 
+export type ITypesRequest = string[]
+
 export const pokemons = [
     {
         name_clean: 'bulbasaur',
